@@ -2,7 +2,7 @@ def img
 pipeline {
     // setting up dockhub information needed to push image.
     environment {
-        registry = "ecarmona1992/project1"
+        registry = "othom/flask"
         registrycredential = 'docker-hub-login'
         dockerimage = ''
     }
@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('download') {
             steps {
-                git 'https://github.com/ecarmona1992/flask-jenkins'
+                git 'https://github.com/OthomDev/Project2'
                 echo 'Finshed downloading git'
                 // force stop docker and clean up images
                 sh "docker system prune -af"
@@ -47,14 +47,4 @@ pipeline {
 
     }
 
-// send email notification once everything completes
-    post {
-        always {
-            
-            emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n",
-                recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-                subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
-            
-        }
-    }
 }
