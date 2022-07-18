@@ -7,9 +7,9 @@ metadata:
 spec:
   type: LoadBalancer
   selector: # scans for deployments that match this selector (this is the green!)
-    app: helloworld-green # this is the updated deployment to use
-    deployment: green
-    version: 1.0.1 # new version
+    app: helloworld # this is the updated deployment to use
+    deployment: blue
+    version: 1.0.0 # new version
   ports:
   - name: http 
     port: 8080
