@@ -2,7 +2,7 @@ def img
 pipeline {
     // setting up dockhub information needed to push image.
     environment {
-        registry = "public.ecr.aws/x8y9i5i2/my-project-repo"
+        registry = "648503940051.dkr.ecr.us-east-2.amazonaws.com/my-project-repo"
     }
     agent any
     // first step is to download git file
