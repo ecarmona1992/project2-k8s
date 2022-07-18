@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helloworld
+  name: helloguys
   labels:
-    app: helloworld
+    app: helloguys
     deployment: blue
     version: 1.0.0 # concept of version could be important for your CD tools. 
 spec: # here's what the deployment is going to create
   replicas: 1
   selector:
     matchLabels:
-      app: helloworld
+      app: helloguys
       deployment: blue # including blue key/value
       version: 1.0.0 # version (optional)
   template: 
     metadata:
       labels:
-        app: helloworld
+        app: helloguys
         deployment: blue
         version: 1.0.0 # concept of version could be important for your CD tools. 
     spec:
       containers:
-      - name: helloworld
+      - name: helloguys
         image: 648503940051.dkr.ecr.us-east-2.amazonaws.com/my-project-repo
         imagePullPolicy: Always
         ports:
@@ -30,27 +30,27 @@ spec: # here's what the deployment is going to create
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helloworld-green
+  name: helloguys-green
   labels:
-    app: helloworld-green
+    app: helloguys-green
     deployment: green
     version: 1.0.1 # concept of version could be important for your CD tools. 
 spec: # here's what the deployment is going to create
   replicas: 1
   selector:
     matchLabels:
-      app: helloworld-green
+      app: helloguys-green
       deployment: green # including blue key/value
       version: 1.0.1 # version (optional)
   template: 
     metadata:
       labels:
-        app: helloworld-green
+        app: helloguys-green
         deployment: green
         version: 1.0.1 # concept of version could be important for your CD tools. 
     spec:
       containers:
-      - name: helloworld-green
+      - name: helloguys-green
         image: 648503940051.dkr.ecr.us-east-2.amazonaws.com/my-project-repo
         imagePullPolicy: Always
         ports:
@@ -59,13 +59,13 @@ spec: # here's what the deployment is going to create
 apiVersion: v1
 kind: Service
 metadata:
-  name: helloworld-service
+  name: helloguys-service
   labels:
-    name: helloworld-service
+    name: helloguys-service
 spec:
   type: LoadBalancer
   selector: # scans for deployments that match this selector (this is the green!)
-    app: helloworld-green # this is the updated deployment to use
+    app: helloguys-green # this is the updated deployment to use
     deployment: green
     version: 1.0.1 # new version
   ports:
