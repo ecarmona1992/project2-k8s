@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: appv
+  name: flask
   labels:
-    app: appv
+    app: flask
     deployment: blue
     version: 1.0.0 # concept of version could be important for your CD tools. 
 spec: # here's what the deployment is going to create
   replicas: 1
   selector:
     matchLabels:
-      app: appv
+      app: flask
       deployment: blue # including blue key/value
       version: 1.0.0 # version (optional)
   template: 
     metadata:
       labels:
-        app: appv
+        app: flask
         deployment: blue
         version: 1.0.0 # concept of version could be important for your CD tools. 
     spec:
       containers:
-      - name: appv
+      - name: flask
         image: 648503940051.dkr.ecr.us-east-2.amazonaws.com/my-project-repo
         imagePullPolicy: Always
         ports:
@@ -30,27 +30,27 @@ spec: # here's what the deployment is going to create
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: appv-green
+  name: flask-green
   labels:
-    app: appv-green
+    app: flask-green
     deployment: green
     version: 1.0.1 # concept of version could be important for your CD tools. 
 spec: # here's what the deployment is going to create
   replicas: 1
   selector:
     matchLabels:
-      app: appv-green
+      app: flask-green
       deployment: green # including blue key/value
       version: 1.0.1 # version (optional)
   template: 
     metadata:
       labels:
-        app: appv-green
+        app: flask-green
         deployment: green
         version: 1.0.1 # concept of version could be important for your CD tools. 
     spec:
       containers:
-      - name: appv-green
+      - name: flask-green
         image: 648503940051.dkr.ecr.us-east-2.amazonaws.com/my-project-repo
         imagePullPolicy: Always
         ports:
@@ -59,13 +59,13 @@ spec: # here's what the deployment is going to create
 apiVersion: v1
 kind: Service
 metadata:
-  name: appv-service
+  name: flask-service
   labels:
-    name: appv-service
+    name: flask-service
 spec:
   type: LoadBalancer
   selector: # scans for deployments that match this selector (this is the green!)
-    app: appv-green # this is the updated deployment to use
+    app: flask-green # this is the updated deployment to use
     deployment: green
     version: 1.0.1 # new version
   ports:
