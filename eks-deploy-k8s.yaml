@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helloguys
+  name: appv
   labels:
-    app: helloguys
+    app: appv
     deployment: blue
     version: 1.0.0 # concept of version could be important for your CD tools. 
 spec: # here's what the deployment is going to create
   replicas: 1
   selector:
     matchLabels:
-      app: helloguys
+      app: appv
       deployment: blue # including blue key/value
       version: 1.0.0 # version (optional)
   template: 
     metadata:
       labels:
-        app: helloguys
+        app: appv
         deployment: blue
         version: 1.0.0 # concept of version could be important for your CD tools. 
     spec:
       containers:
-      - name: helloguys
+      - name: appv
         image: 648503940051.dkr.ecr.us-east-2.amazonaws.com/my-project-repo
         imagePullPolicy: Always
         ports:
@@ -30,27 +30,27 @@ spec: # here's what the deployment is going to create
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helloguys-green
+  name: appv-green
   labels:
-    app: helloguys-green
+    app: appv-green
     deployment: green
     version: 1.0.1 # concept of version could be important for your CD tools. 
 spec: # here's what the deployment is going to create
   replicas: 1
   selector:
     matchLabels:
-      app: helloguys-green
+      app: appv-green
       deployment: green # including blue key/value
       version: 1.0.1 # version (optional)
   template: 
     metadata:
       labels:
-        app: helloguys-green
+        app: appv-green
         deployment: green
         version: 1.0.1 # concept of version could be important for your CD tools. 
     spec:
       containers:
-      - name: helloguys-green
+      - name: appv-green
         image: 648503940051.dkr.ecr.us-east-2.amazonaws.com/my-project-repo
         imagePullPolicy: Always
         ports:
@@ -59,13 +59,13 @@ spec: # here's what the deployment is going to create
 apiVersion: v1
 kind: Service
 metadata:
-  name: helloguys-service
+  name: appv-service
   labels:
-    name: helloguys-service
+    name: appv-service
 spec:
   type: LoadBalancer
   selector: # scans for deployments that match this selector (this is the green!)
-    app: helloguys # this is the updated deployment to use
+    app: appv # this is the updated deployment to use
     deployment: blue
     version: 1.0.0 # new version
   ports:
