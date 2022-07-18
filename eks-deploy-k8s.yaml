@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld
+  labels:
+    app: helloworld
+    deployment: blue
+    version: 1.0.0 # concept of version could be important for your CD tools. 
+spec: # here's what the deployment is going to create
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helloworld
+      deployment: blue # including blue key/value
+      version: 1.0.0 # version (optional)
+  template: 
+    metadata:
+      labels:
+        app: helloworld
+        deployment: blue
+        version: 1.0.0 # concept of version could be important for your CD tools. 
+    spec:
+      containers:
+      - name: helloworld
+        image: othom/flask:11
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-green
+  labels:
+    app: helloworld-green
+    deployment: green
+    version: 1.0.1 # concept of version could be important for your CD tools. 
+spec: # here's what the deployment is going to create
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helloworld-green
+      deployment: green # including blue key/value
+      version: 1.0.1 # version (optional)
+  template: 
+    metadata:
+      labels:
+        app: helloworld-green
+        deployment: green
+        version: 1.0.1 # concept of version could be important for your CD tools. 
+    spec:
+      containers:
+      - name: helloworld-green
+        image: othom/flask:14
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld-service
+  labels:
+    name: helloworld-service
+spec:
+  type: LoadBalancer
+  selector: # scans for deployments that match this selector (this is the green!)
+    app: helloworld # this is the updated deployment to use
+    deployment: blue
+    version: 1.0.0 # new version
+  ports:
+  - name: http 
+    port: 8080
+    targetPort: 5000
