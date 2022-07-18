@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     
-                    dockerImage = "docker build -t project2 ."
+                    docker.build registry
                 }
             }
         }
