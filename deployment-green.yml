@@ -22,7 +22,7 @@ spec: # here's what the deployment is going to create
     spec:
       containers:
       - name: helloworld-green
-        image: ?????????
+        image: othom/flask:12
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
