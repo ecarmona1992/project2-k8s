@@ -22,7 +22,7 @@ spec: # here's what the deployment is going to create
     spec:
       containers:
       - name: helloworld
-        image: othom/flask:11
+        image: 648503940051.dkr.ecr.us-east-2.amazonaws.com/my-project-repo
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
@@ -51,7 +51,7 @@ spec: # here's what the deployment is going to create
     spec:
       containers:
       - name: helloworld-green
-        image: othom/flask:14
+        image: 648503940051.dkr.ecr.us-east-2.amazonaws.com/my-project-repo
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
@@ -70,5 +70,5 @@ spec:
     version: 1.0.0 # new version
   ports:
   - name: http 
-    port: 8080
+    port: 80
     targetPort: 5000
