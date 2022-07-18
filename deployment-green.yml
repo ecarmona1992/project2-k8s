@@ -22,7 +22,7 @@ spec: # here's what the deployment is going to create
     spec:
       containers:
       - name: helloworld-green
-        image: ecarmona1992/project1:93
+        image: ?????????
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
