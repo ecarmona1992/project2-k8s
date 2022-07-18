@@ -17,13 +17,16 @@ pipeline {
         }
         stage('testing') {
             steps {
-                sh "python3 test.py"
+                
+                sh "pip3 install -r requirements.txt"
+                sh "python3 -m pytest app_test.py"
             }
         }
 
         stage('Build Image') {
             steps {
                 script {
+                    
                     dockerImage = "docker build -t project2 ."
                 }
             }
