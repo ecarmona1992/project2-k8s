@@ -59,9 +59,9 @@ spec: # here's what the deployment is going to create
 apiVersion: v1
 kind: Service
 metadata:
-  name: appv-green-service
+  name: appv-service
   labels:
-    name: appv-green-service
+    name: appv-service
 spec:
   type: LoadBalancer
   selector: # scans for deployments that match this selector (this is the green!)
