@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('download') {
             steps {
-                git 'https://github.com/OthomDev/Project2'
+                git 'https://github.com/OthomDev/Project2-1'
                 echo 'Finshed downloading git'
                 // force stop docker and clean up images
                 sh "docker system prune -af"
@@ -39,7 +39,13 @@ pipeline {
                 sh "docker push 648503940051.dkr.ecr.us-east-2.amazonaws.com/my-project-repo:latest"
             }
         }
-       
+        stage('K8S Deploy'){
+            steps {
+                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'K8S', namespace: '', serverUrl: '') {
+                    sh "kubectl apply -f eks-deploy-k8s.yaml"
+                }
+            }
+        }
         
         
 
