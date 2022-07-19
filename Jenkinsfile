@@ -26,8 +26,8 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    img = registry + ":${env.BUILD_ID}"
-                    dockerimage = docker.build("${img}")
+                    
+                    docker.build registry
                 }
             }
         }
@@ -36,9 +36,7 @@ pipeline {
             steps{
                 
                 sh "aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 524472057840.dkr.ecr.us-east-2.amazonaws.com"
-                script {
-                    sh "docker push ${dockerimage}"
-                }
+                sh "docker push 524472057840.dkr.ecr.us-east-2.amazonaws.com/project2:latest"
             }
         }
         stage('K8S Deploy'){
