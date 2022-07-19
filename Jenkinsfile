@@ -39,14 +39,14 @@ pipeline {
                 sh "docker push 524472057840.dkr.ecr.us-east-2.amazonaws.com/project2:latest"
             }
         }
-        // stage('K8S Deploy'){
-        //     steps {
-        //         withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'K8S', namespace: '', serverUrl: '') {
-        //             sh "kubectl apply -f eks-deploy-k8s-green.yaml"
-        //             sh "kubectl apply -f eks-deploy-k8s-blue.yaml"
-        //         }
-        //     }
-        // }
+        stage('K8S Deploy'){
+            steps {
+                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'K8S', namespace: '', serverUrl: '') {
+                    sh "kubectl apply -f eks-deploy-k8s-green.yaml"
+                    sh "kubectl apply -f eks-deploy-k8s-blue.yaml"
+                }
+            }
+        }
         
         
 
