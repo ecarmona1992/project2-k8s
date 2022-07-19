@@ -44,6 +44,7 @@ pipeline {
                 withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'K8S', namespace: '', serverUrl: '') {
                     sh "kubectl apply -f eks-deploy-k8s-green.yaml"
                     sh "kubectl apply -f eks-deploy-k8s-blue.yaml"
+                    sh "kubectl apply -f service.yml"
                 }
             }
         }
