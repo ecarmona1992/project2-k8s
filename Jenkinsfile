@@ -45,6 +45,7 @@ pipeline {
                     sh "kubectl apply -f eks-deploy-k8s-green.yaml"
                     sh "kubectl apply -f eks-deploy-k8s-blue.yaml"
                     sh "kubectl apply -f service.yml"
+                    sh "kubectl apply -f service-green.yml"
                 }
             }
         }
