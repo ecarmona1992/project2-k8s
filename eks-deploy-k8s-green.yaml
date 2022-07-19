@@ -22,7 +22,7 @@ spec: # here's what the deployment is going to create
     spec:
       containers:
       - name: fllask-green
-        image: 648503940051.dkr.ecr.us-east-2.amazonaws.com/my-project-repo
+        image: 524472057840.dkr.ecr.us-east-2.amazonaws.com/project2
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
