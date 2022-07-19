@@ -26,20 +26,3 @@ spec: # here's what the deployment is going to create
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: fllask-service
-  labels:
-    name: fllask-service
-spec:
-  type: LoadBalancer
-  selector: # scans for deployments that match this selector (this is the green!)
-    app: fllask # this is the updated deployment to use
-    deployment: blue
-    version: 1.0.0 # new version
-  ports:
-  - name: http 
-    port: 80
-    targetPort: 5000
