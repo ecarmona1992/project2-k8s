@@ -22,7 +22,7 @@ spec: # here's what the deployment is going to create
     spec:
       containers:
       - name: fllask
-        image: 524472057840.dkr.ecr.us-east-2.amazonaws.com/project2
+        image: 524472057840.dkr.ecr.us-east-2.amazonaws.com/project2@sha256:5c963f0c525c09c728e659f98e5cb6c1ebfa528a4750f8815203da6d97df3106
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
