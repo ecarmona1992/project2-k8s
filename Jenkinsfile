@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     
-                    docker.build registry
+                    docker.build registry + ":${env.BUILD_ID}"
                 }
             }
         }
